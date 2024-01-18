@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Logo title -->
+    <link rel="icon" href="products/logo.jpg" class="icon-logo">
+    <!-- My style -->
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- Alphine js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+     <!-- app.js -->
+     <script src="src/app.js" async></script>
+
+     <style>
+      /* Ganti nilai tinggi sesuai kebutuhan Anda */
+      .carousel-inner img {
+        object-fit: cover;
+      max-height: 400px;
+      margin: auto;
+      }
+    </style>
+    <title>Aloevera Bliss</title>
+  </head>
+  <body id="">
+    <!-- Navbar Start -->
+    <nav class="pertama" x-data>
+      <a href="#" class="navbar-logo">Aloevera<span>Bliss</span></a>
+
+      <div class="keduaNav">
+        <a href="#home">Home</a>
+        <a href="#about">Tentang Kami</a>
+        <a href="#menu">Menu</a>
+        <a href="#products">Produk</a>
+        <a href="#contact">Kontak</a>
+      </div>
+
+      <div class="extraNav">
+        <a href="#" id="search-button"><i data-feather="search"></i></a>
+        <a href="#" id="shopping-cart-button">
+          <i data-feather="shopping-cart"></i>
+          <span class="quantity-badge" x-show="$store.cart.quantity" x-text="$store.cart.quantity"></span>
+        </a>
+        <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+      </div>
+
+      <!-- Search form start -->
+      <div class="search-form">
+        <input type="search" id="search-box" placeholder="search here..." />
+        <label for="search-box"><i data-feather="search"></i></label>
+      </div>
+      <!-- Search form end -->
+
+      <!-- Shopping Cart start -->
+      <div class="shopping-cart" >
+<template x-for="(item, index) in $store.cart.items" x-key="index">
+  <div class="cart-item">
+    <img :src="`products/${item.img}`" :alt="item.name" />
+    <div class="item-detail">
+      <h3 x-name></h3>
+      <div class="item-price">
+        <span x-text="rupiah(item.price)"></span> &times;
+        <button id="remove" @click="$store.cart.remove(item.id)">&minus;</button>
+        <span x-text="item.quantity"></span>
+        <button id="add" @click="$store.cart.add(item)">&plus;</button> &equals;
+        <span x-text="rupiah(item.total)"></span>
+      </div>
+    </div>
+  </div>
+</template>
+<h4 x-show="!$store.cart.items.length" style="margin-top: 1rem;">Cart is empty</h4>
+<h4 x-show="$store.cart.items.length">Total : <span x-text="rupiah($store.cart.total)"></span></h4>
+
+<!-- Form user -->
+<div class="form-container" x-show="$store.cart.items.length">
+  <form action="" id="checkoutForm">
+    <input type="hidden" name="items" x-model="JSON.stringify($store.cart.items)">
+    <input type="hidden" name="total" x-model="$store.cart.total">
+    <h5>Customer Detail</h5>
+    <label for="name">
+      <span>Name</span>
+      <input type="text" name="name" id="name">
+    </label>
+
+    <label for="email">
+      <span>Email</span>
+      <input type="email" name="email" id="Email">
+    </label>
+
+    <label for="phone">
+      <span>Phone</span>
+      <input type="number" name="phone" id="phone" autocomplete="off">
+    </label>
+
+    <button class="checkout-button disabled" type="submit" id="checkout-button" value="checkout">Checkout</button>
+    
+  </form>
+</div>
+      </div>
+      <!-- Shopping Cart end -->
+    </nav>
+    <!-- Navbar Akhir -->
+
+
+
+
+
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="img/1.jpg" alt="First slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="img/2.jpg" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="img/3.jpg" alt="Third slide">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- About section start -->
+    <section id="about" class="about">
+      <h2><span>Tentang</span> Kami</h2>
+      <div class="row">
+        <div class="about-img">
+          <img src="/products/logo.jpg" alt="Tentang Kami" />
+        </div>
+        <div class="content">
+          <h3>Kenapa Memilih Aloevera?</h3>
+          <p>
+            Aloe vera, minuman yang semakin populer di kalangan pencinta gaya hidup sehat, terbuat dari getah segar tanaman lidah buaya. Dengan tekstur dingin dan kenyal, memberikan sensasi kesegaran yang cocok untuk cuaca panas. Aroma ringan lidah buaya menambah daya tariknya sebagai alternatif alami rendah kalori.
+
+            Kaya akan vitamin A, C, dan E, aloe vera mendukung kesehatan kulit dan sistem kekebalan tubuh. Senyawa antioksidannya membantu melawan radikal bebas, detoksifikasi tubuh, dan mengurangi peradangan. Selain bermanfaat bagi pencernaan, aloe vera juga dikaitkan dengan peningkatan energi dan sistem kekebalan tubuh.
+            
+            Dengan sifat menenangkan, aloe vera meredakan gangguan pencernaan seperti perut kembung dan asam lambung. Sebagai minuman rendah kalori dan gula, aloe vera menjadi pilihan sehat untuk mendukung gaya hidup sehat dan menjaga berat badan. Kesegaran dan manfaat kesehatannya menjadikan aloe vera favorit bagi mereka yang peduli akan kesehatan dan kebugaran.
+            
+            
+            
+            
+            
+          </p>
+          <!-- <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
+            quos assumenda corporis inventore deleniti possimus quas ut sit
+            temporibus quae!
+          </p> -->
+        </div>
+      </div>
+    </section>
+    <!-- About section akhir -->
+
+    <!-- Menu section start-->
+
+    <section id="menu" class="menu">
+      <h2><span>Menu</span> Kami</h2>
+      <p>
+        Lawan panas terik dengan kelezatan yang menyegarkan
+      </p>
+
+      <div class="rowMenu">
+        <div class="menu-card">
+          <img
+            src="products/produk-1.jpg"
+            alt="Espresso"
+            class="menu-card-img"
+          />
+          <h3 class="menu-card-title">- Red Aloevera -</h3>
+          <p class="menu-card-price">IDR 7K</p>
+        </div>
+        <div class="menu-card">
+          <img
+            src="products/produk-2.jpg"
+            alt="Espresso"
+            class="menu-card-img"
+          />
+          <h3 class="menu-card-title">- White Aloevera -</h3>
+          <p class="menu-card-price">IDR 7K</p>
+        </div>
+        <div class="menu-card">
+          <img
+            src="products/produk-3.jpg"
+            alt="Espresso"
+            class="menu-card-img"
+          />
+          <h3 class="menu-card-title">- Green Aloevera -</h3>
+          <p class="menu-card-price">IDR 7K</p>
+        </div>
+
+      </div>
+    </section>
+    <!-- Menu section end-->
+
+    <!-- Section Products start -->
+    <section class="products" id="products" x-data="products">
+      <h2><span>Produk unggulan</span> kami</h2>
+      <p>Jangan Lewatkan Kesempatan Untuk Menikmati Keistimewaan Produk Kami</p>
+
+      <div class="row">
+      <template x-for="(item, index) in items" x-key="index">
+        <div class="product-card">
+          <div class="product-icons">
+            <a href="#" @click.Prevent="$store.cart.add(item)">
+              <svg
+  width="24"
+  height="24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <use href="img/feather-sprite.svg#shopping-cart" />
+</svg>
+            </a>
+            <a href="#" class="item-detail-button">
+              <svg
+  width="24"
+  height="24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <use href="img/feather-sprite.svg#eye" />
+</svg>
+            </a>
+          </div>
+          <div class="product-image">
+            <img :src="`products/${item.img}`" :alt="item.name" />
+          </div>
+          <div class="product-content">
+            <h3 x-text="item.name"></h3>
+            <div class="product-stars">
+            <svg
+width="24"
+height="24"
+fill="currentColor"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
+>
+<use href="img/feather-sprite.svg#star" />
+</svg>
+
+<svg
+width="24"
+height="24"
+fill="currentColor"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
+>
+<use href="img/feather-sprite.svg#star" />
+</svg>
+
+<svg
+width="24"
+height="24"
+fill="currentColor"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
+>
+<use href="img/feather-sprite.svg#star" />
+</svg>
+
+<svg
+width="24"
+height="24"
+fill="currentColor"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
+>
+<use href="img/feather-sprite.svg#star" />
+</svg>
+
+<svg
+width="24"
+height="24"
+fill="currentColor"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
+>
+<use href="img/feather-sprite.svg#star" />
+</svg>
+
+
+            </div>
+            <div class="product-price">
+              <span x-text="rupiah(item.price)"></span>
+            </div>
+          </div>
+        </div>
+      </template>
+      </div>
+    </section>
+    <!-- Section Products end -->
+
+    <!-- contact section start -->
+
+    <section id="contact" class="contact">
+      <h2><span>Kontak</span> Kami</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, ab?
+      </p>
+      <div class="row">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.2415692961345!2d106.84187777414941!3d-6.362773893627271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ed6178a2b32f%3A0x20d7938791acfd4a!2sSTT%20Terpadu%20Nurul%20Fikri%20(Kampus%20A%20-%20Sekretariat)!5e0!3m2!1sen!2sid!4v1704471484587!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <form action="">
+          <div class="input-group">
+            <i data-feather="user"></i>
+            <input type="text" placeholder="nama" />
+          </div>
+          <div class="input-group">
+            <i data-feather="mail"></i>
+            <input type="text" placeholder="email" />
+          </div>
+          <div class="input-group">
+            <i data-feather="phone"></i>
+            <input type="text" placeholder="no hp" />
+          </div>
+          <button type="submit">Kirim Pesan</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- footer start -->
+    <footer>
+      <div class="socials">
+        <a href="https://www.instagram.com/aloeone_si?igsh=MTRyZTFmZjhjOWQz"
+          target="_blank"><i data-feather="instagram"></i
+        ></a>
+        <a href="#"><i data-feather="twitter"></i></a>
+        <a href="#"><i data-feather="facebook"></i></a>
+      </div>
+      <div class="links">
+        <a href="#home">Home</a>
+        <a href="#about">Tentang Kami</a>
+        <a href="#menu">Menu</a>
+        <a href="#contact">Kontak</a>
+      </div>
+      <div class="credits">
+        <p>
+          Created by
+          <a href="https://www.instagram.com/thoriq_abdillah/"
+            >SI 01 - 02</a
+          >. | &copy; 2023
+        </p>
+      </footer>
+    <!-- footer end -->
+
+    <!-- Modal Box Item Detail start -->
+    <div class="modal" id="item-detail-modal">
+      <div class="modal-container">
+        <a href="#" class="close-icon"><i data-feather="x"></i></a>
+        <div class="modal-content">
+          <img src="products/aloe-vera-1.jpg" alt="produk 1" />
+            <div class="product-content">
+              <h3>Product 1</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non
+                saepe nihil beatae quae atque voluptatibus vero, commodi
+                explicabo, iure esse quia nisi dolore, reprehenderit repellendus.
+              </p>
+              <div class="product-stars">
+                <i data-feather="star" class="star-full"></i>
+                <i data-feather="star" class="star-full"></i>
+                <i data-feather="star" class="star-full"></i>
+                <i data-feather="star" class="star-full"></i>
+                <i data-feather="star"></i>
+              </div>
+              <div class="product-price"><span x-text="price"></span>
+              </div>
+              <a href="#">
+                <i data-feather="shopping-cart"></i>
+                <span>add to cart</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Box Item Detail end -->
+
+    <!-- Feather icons-->
+    <script>
+      feather.replace();
+    </script>
+
+    <!-- my JS -->
+    <script src="javascript/script.js"></script>
+    
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
